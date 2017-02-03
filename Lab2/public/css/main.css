@@ -109,6 +109,7 @@ font-style: italic;
     float: left;
     padding-left: 20px;
     padding-right: 20px;
+    width: 25%;
     }
    .flex-container article {
     /* Flex shorthand: flex-grow, flex-shrink: flex-basis:  */
