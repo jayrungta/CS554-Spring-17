@@ -1,7 +1,7 @@
 const path = require('path');
 
 const constructorMethod = (app) => {
-    app.use("/", (req, response) => {
+    app.get("/", (req, response) => {
         response.render("home", { pageTitle: "My Favorite TV Shows" });
     });
 
