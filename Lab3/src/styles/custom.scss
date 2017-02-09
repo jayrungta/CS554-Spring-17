@@ -1,0 +1,88 @@
+@import "variables";
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    background: $body-background;
+    color: $brand-primary;
+    font-family: $font-family;
+    font-size: $primary-font-size;
+}
+
+nav {
+    text-align: center;
+}
+
+nav li a{
+    font-size: 1.5rem;
+    color: $brand-primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $brand-primary;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.title-area {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.card-text {
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+    color: $brand-secondary;
+}
+
+ .card-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-img-top {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.review {
+    font-style: italic;
+}
+
+.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Pseudo-classes */
+
+nav ul li:nth-child() {
+    padding-left: 10px;
+}
+
+nav li a:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color: $link-hover-color;
+    }
+
+nav li a {
+font-style: italic;
+}
