@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Pixabay Search</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			font: 13px Helvetica, Arial;
+		}
+		
+		form {
+			background: #000;
+			padding: 3px;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+		}
+		
+		.form-group {
+			padding: 5px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+		
+		#messages {
+			list-style-type: none;
+			margin: 0 0 50px 0;
+			padding: 0;
+		}
+		
+		#messages li {
+			padding: 5px 10px;
+		}
+		
+		#messages li:nth-child(odd) {
+			background: #eee;
+		}
+		
+		img {
+			margin: 10px;
+		}
+		
+		label {
+			color: white;
+			margin-right: 10px
+		}
+	</style>
+</head>
+
+<body>
+	<ul id="messages"></ul>
+	<form action="" class="form-inline">
+		<div class="form-group">
+			<label for="username">Name:</label>
+			<input type="text" class="form-control" id="username" placeholder="Username">
+		</div>
+		<div class="form-group">
+			<label for="query">Search Query:</label>
+			<input class="form-control" id="query" placeholder="Search Query">
+		</div>
+		<div class="form-group">
+			<label for="message">Message:</label>
+			<input class="form-control" id="message" placeholder="Message">
+		</div>
+		<button type="submit" class="btn btn-default">Search</button>
+	</form>
+
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+	<script src="/jquery/js/jquery.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		const username = $("#username");
+		const display = $("#display");
+		const socket = io('http://localhost:3000/search');
+		const messages = $("#messages");
+		const query = $("#query");
+		const theForm = $("form");
+		const msg = $("#message");
+
+		socket.on('request-credentials', () => {
+			socket.emit('setup', { username: username.val() });
+		});
+
+		socket.on('receive-message', function (msg) {
+			let listHTML = '<li>';
+			listHTML += '<p>User: ' + msg.username + '</p>';
+			listHTML += '<p>Message: ' + msg.message + '</p>';
+
+			msg.urls.forEach(function (element) {
+				listHTML += "<img src ='" + element + "' alt='picture'>";
+			}, this);
+
+			listHTML += '</li>';
+			messages.append(listHTML);
+		});
+
+		socket.on('fail-message', function (msg) {
+			alert(msg);
+		});
+
+		theForm.submit(function () {
+			console.log(username.val());
+			if (username.val() != "" && msg.val() != "" && query.val() != "") {
+				let message = {
+					query: query.val(),
+					msg: msg.val(),
+					username: username.val()
+				};
+
+				socket.emit('send-message', message);
+				query.val('');
+				msg.val('');
+				username.attr("disabled", 1);
+				return false;
+			}
+			else {
+				alert("One or more form values are missing!");
+				return false;
+			}
+		});
+	</script>
+</body>
+
+</html>
