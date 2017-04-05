@@ -1,0 +1,23 @@
+{
+  "name": "CS-554-lab-9-api",
+  "version": "1.0.0",
+  "description": "An API for user data",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "productName": "CS-554-lab-9-api",
+  "author": "Jay Rungta",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "jquery": "^3.1.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.5"
+  }
+}
